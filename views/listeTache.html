@@ -20,10 +20,13 @@
             <h1 class="text-2xl font-bold mb-4">Liste des Taches</h1>
             <div class="flex items-center mb-4">
                 <input type="text" placeholder="search tache"
-                    class="flex-1 border border-gray-300 rounded-l-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" />
+                    class="flex-1 border border-gray-300 rounded-l-md py-2 px-3 focus:outline-none focus:ring-2 
+                    focus:ring-green-500 focus:border-transparent" id="filterInput" />
                 <select
                     class="border border-gray-300 select-change rounded-r-md py-2 px-3 mx-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
                     <option value="all">All</option>
+                    <option value="all">tache Complet</option>
+                    <option value="all">tache Imcomplet</option>
                 </select>
                 <div class="flex items-center ml-4">
                     <span id="light-icon" class="material-symbols-outlined text-green-500 cursor-pointer"
@@ -191,6 +194,7 @@
                         <label for="" class="text-white">Tache:</label><br>
                         <input type="text" class="w-full p-2 rounded  border border-success border border-5 mt-3" id="tacheInput"
                             name="nom" placeholder="entrer la tache ">
+                        <div class="erreur hidden text-red-500" id="inputTacheError">Veillez entrer un email valide</div>
                     </div>
                     <!-- Modal footer -->
                     <div

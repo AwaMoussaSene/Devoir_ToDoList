@@ -1,9 +1,12 @@
 const tbodyTache = document.getElementById("tbodyTache");
-const addTacheForm = document.getElementById("addTacheForm"); // Le formulaire pour ajouter une tâche
-const tacheInput = document.getElementById("tacheInput"); // L'input où l'utilisateur écrit la tâche
+const addTacheForm = document.getElementById("addTacheForm"); 
+const tacheInput = document.getElementById("tacheInput"); 
+const filterInput = document.getElementById("filterInput"); 
+const inputTacheError =document.getElementById("inputTacheError");
 
 let allTache = [];
-const userId = new URLSearchParams(window.location.search).get('userId'); // Récupère l'ID de l'utilisateur depuis l'URL
+// Récupère l'ID de l'utilisateur depuis l'URL
+const userId = new URLSearchParams(window.location.search).get('userId'); 
 
 // Fonction pour récupérer les tâches
 async function fetchTache() {
@@ -11,24 +14,27 @@ async function fetchTache() {
         const response = await fetch('http://localhost:3000/taches');
         const data = await response.json();
         allTache = data;
-
-        // Filtrer les tâches pour l'utilisateur connecté
         const userTaches = allTache.filter(tache => tache.userId == userId);
-
-        // Appeler la fonction pour afficher les tâches après récupération des données
-        displayTaches(userTaches);
+        const filterTaches = filterTache(userTaches);
+        displayTaches(filterTaches);
     } catch (error) {
         console.error('Erreur lors de la récupération des tâches:', error);
-        alert("Impossible de charger les tâches. Veuillez réessayer plus tard.");
     }
+}
+
+// Fonction pour appliquer le filtre
+function filterTache(taches) {
+    const filterText = filterInput.value.trim().toLowerCase(); 
+
+    if (!filterText) {
+        return taches; 
+    }
+    return taches.filter(tache => tache.nom_tache.toLowerCase().includes(filterText));
 }
 
 // Fonction pour afficher les tâches dans le tableau
 function displayTaches(taches) {
-    // Réinitialiser le contenu du tableau
     tbodyTache.innerHTML = "";
-
-    // Parcourir toutes les tâches et les ajouter au tableau
     taches.forEach((tache) => {
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -41,21 +47,22 @@ function displayTaches(taches) {
                   <i class="material-icons text-red-500 mr-2" data-modal-target="static-modal" data-modal-toggle="static-modal">delete</i>
                 </td>
         `;
-        tbodyTache.appendChild(row); // Ajouter la ligne au tableau
+        tbodyTache.appendChild(row); 
     });
 }
 
 // Fonction pour ajouter une nouvelle tâche
 async function addTache(event) {
     event.preventDefault(); // Empêche l'envoi par défaut du formulaire
-
     const nomTache = tacheInput.value.trim();
-
     if (!nomTache) {
-        alert("Veuillez entrer le nom de la tâche.");
+        inputTacheError.textContent = "Veuillez entrer le nom de la tâche.";
+        inputTacheError.classList.remove("hidden");
         return;
-    }
 
+      } else {
+        inputTacheError.classList.add("hidden");
+      }
     try {
         const newTache = {
             nom_tache: nomTache,
@@ -86,8 +93,14 @@ async function addTache(event) {
     }
 }
 
-// Ajouter un écouteur d'événement au formulaire
+// Ajouter un écouteur d'événement au formulaire pour l'ajout de tâche
 addTacheForm.addEventListener('submit', addTache);
+
+// Ajouter un écouteur d'événement pour le champ de filtre
+filterInput.addEventListener('input', () => {
+    // Appeler fetchTache pour appliquer le filtre à chaque saisie
+    fetchTache();
+});
 
 // Appeler la fonction fetchTache pour récupérer et afficher les données
 fetchTache();
