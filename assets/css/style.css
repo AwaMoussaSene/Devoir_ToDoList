@@ -1,0 +1,17 @@
+/* Styles pour le mode sombre */
+.dark {
+  background-color: #2d3748; /* Arrière-plan sombre */
+  color: #edf2f7; /* Texte clair */
+}
+.dark .bg-white {
+  background-color: #4a5568; /* Fond des éléments en mode sombre */
+}
+.dark .border-gray-300 {
+  border-color: #4a5568; /* Couleur de bordure en mode sombre */
+}
+.dark .change_mode {
+  background-color: #030f08; /* Vert plus clair pour le mode sombre */
+}
+.dark .select-change{
+    color: #030f08;
+}

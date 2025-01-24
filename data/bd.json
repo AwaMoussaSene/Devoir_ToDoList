@@ -1,0 +1,58 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "nomComplet": "Issa Ndiaye",
+      "email": "Issandiaye@example.com",
+      "password": "passer"
+    },
+    {
+      "id": "2",
+      "nomComplet": "Fatou Diop",
+      "email": "fatoudiop@example.com",
+      "password": "passer"
+    }
+  ],
+  "taches": [
+    {
+      "id": "2",
+      "nom_tache": "Créer un design avec Tailwind CSS",
+      "userId": 2
+    },
+    {
+      "id": "3",
+      "nom_tache": "Tester l'intégration de Flowbite",
+      "userId": 1
+    },
+    {
+      "id": "4",
+      "nom_tache": "Mettre à jour la base de données",
+      "userId": 1
+    },
+    {
+      "id": "5",
+      "nom_tache": "Rédiger la documentation de l'API",
+      "userId": 1
+    },
+    {
+      "id": "6",
+      "nom_tache": "Ajouter des tests unitaires",
+      "userId": 1
+    },
+    {
+      "id": "7",
+      "nom_tache": "Configurer les environnements de développement",
+      "userId": 2
+    },
+    {
+      "id": "8",
+      "nom_tache": "Analyser les besoins fonctionnels",
+      "userId": 2
+    },
+    {
+      "id": "1c5a",
+      "nom_tache": "Cours UML",
+      "userId": "1"
+    }
+  ]
+}
